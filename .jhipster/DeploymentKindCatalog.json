@@ -1,0 +1,34 @@
+{
+  "applications": "*",
+  "changelogDate": "20220317160815",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "deployment_kind_catalog",
+  "fields": [
+    {
+      "fieldName": "deploymentKind",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "deploymentDefinition",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "DeploymentKindCatalog",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "componentDefinition",
+      "otherEntityRelationshipName": "deploymentKindCatalog",
+      "relationshipName": "componentDefinition",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "no"
+}

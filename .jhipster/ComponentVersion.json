@@ -1,0 +1,29 @@
+{
+  "applications": "*",
+  "changelogDate": "20220317161654",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "component_version",
+  "fields": [
+    {
+      "fieldName": "componentVersionNumber",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "ComponentVersion",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "componentId",
+      "otherEntityName": "componentDefinition",
+      "otherEntityRelationshipName": "componentVersion",
+      "relationshipName": "componentId",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

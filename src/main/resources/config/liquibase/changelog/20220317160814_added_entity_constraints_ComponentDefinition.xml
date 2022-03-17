@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+    <!--
+        Added the constraints for entity ComponentDefinition.
+    -->
+    <changeSet id="20220317160814-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="deployment_kind_catalog_id"
+                                 baseTableName="component_definition"
+                                 constraintName="fk_component_definition__deployment_kind_catalog_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="deployment_kind_catalog"/>
+    </changeSet>
+</databaseChangeLog>

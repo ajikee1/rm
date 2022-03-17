@@ -1,0 +1,11 @@
+id;deployment_kind;deployment_definition
+1;backing Configuration;../fake-data/blob/hipster.txt
+2;Frozen;../fake-data/blob/hipster.txt
+3;Fresh;../fake-data/blob/hipster.txt
+4;Avon Practical Syrian;../fake-data/blob/hipster.txt
+5;Infrastructure Myanmar solid;../fake-data/blob/hipster.txt
+6;drive;../fake-data/blob/hipster.txt
+7;Metrics Beauty uniform;../fake-data/blob/hipster.txt
+8;Games;../fake-data/blob/hipster.txt
+9;Compatible;../fake-data/blob/hipster.txt
+10;Mississippi Designer;../fake-data/blob/hipster.txt

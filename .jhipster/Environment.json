@@ -1,0 +1,26 @@
+{
+  "applications": "*",
+  "changelogDate": "20220317164046",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "environment",
+  "fields": [
+    {
+      "fieldName": "environmentName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "environmentType",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Environment",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [],
+  "service": "no"
+}

@@ -1,0 +1,28 @@
+entity ComponentDefinition {
+    componentId Long required
+    componentName String required
+}
+
+entity DeploymentKindCatalog {
+	deploymentKind String required
+    deploymentDefinition TextBlob required
+}
+
+entity ComponentVersion {
+	componentVersionNumber Long required
+}
+
+entity Environment {
+    environmentName String required
+    environmentType String required
+}
+
+entity ComponentSet {
+    componentSetName String required
+}
+
+relationship OneToMany {
+    DeploymentKindCatalog to ComponentDefinition{DeploymentKindCatalog(deploymentKind)},
+    ComponentDefinition to ComponentVersion{ComponentId(componentId)},
+    ComponentDefinition to ComponentSet{ComponentId(componentId)}
+}

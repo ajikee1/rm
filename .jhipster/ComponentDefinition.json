@@ -1,0 +1,46 @@
+{
+  "applications": "*",
+  "changelogDate": "20220317160814",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "component_definition",
+  "fields": [
+    {
+      "fieldName": "componentId",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "componentName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "ComponentDefinition",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "componentVersion",
+      "otherEntityRelationshipName": "componentId",
+      "relationshipName": "componentVersion",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "componentSet",
+      "otherEntityRelationshipName": "componentId",
+      "relationshipName": "componentSet",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "deploymentKind",
+      "otherEntityName": "deploymentKindCatalog",
+      "otherEntityRelationshipName": "componentDefinition",
+      "relationshipName": "deploymentKindCatalog",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}
