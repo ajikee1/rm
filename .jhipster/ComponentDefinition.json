@@ -29,12 +29,6 @@
       "relationshipType": "one-to-many"
     },
     {
-      "otherEntityName": "componentSet",
-      "otherEntityRelationshipName": "componentId",
-      "relationshipName": "componentSet",
-      "relationshipType": "one-to-many"
-    },
-    {
       "otherEntityField": "deploymentKind",
       "otherEntityName": "deploymentKindCatalog",
       "otherEntityRelationshipName": "componentDefinition",

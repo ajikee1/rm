@@ -30,7 +30,7 @@ public class DeploymentKindCatalog implements Serializable {
     private String deploymentDefinition;
 
     @OneToMany(mappedBy = "deploymentKindCatalog")
-    @JsonIgnoreProperties(value = { "componentVersions", "componentSets", "deploymentKindCatalog" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "componentVersions", "deploymentKindCatalog" }, allowSetters = true)
     private Set<ComponentDefinition> componentDefinitions = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

@@ -24,7 +24,7 @@ public class ComponentSet implements Serializable {
     private String componentSetName;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "componentVersions", "componentSets", "deploymentKindCatalog" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "componentVersions", "deploymentKindCatalog" }, allowSetters = true)
     private ComponentDefinition componentId;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

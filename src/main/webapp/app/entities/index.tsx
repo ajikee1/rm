@@ -9,6 +9,7 @@ import DeploymentKindCatalog from './deployment-kind-catalog';
 import ComponentVersion from './component-version';
 import Environment from './environment';
 import ComponentSet from './component-set';
+import ReleaseCatalog from './release-catalog';
 /* jhipster-needle-add-route-import - JHipster will add routes here */
 
 const Routes = ({ match }) => (
@@ -20,6 +21,7 @@ const Routes = ({ match }) => (
       <ErrorBoundaryRoute path={`${match.url}component-version`} component={ComponentVersion} />
       <ErrorBoundaryRoute path={`${match.url}environment`} component={Environment} />
       <ErrorBoundaryRoute path={`${match.url}component-set`} component={ComponentSet} />
+      <ErrorBoundaryRoute path={`${match.url}release-catalog`} component={ReleaseCatalog} />
       {/* jhipster-needle-add-route-path - JHipster will add routes here */}
     </Switch>
   </div>

@@ -20,6 +20,8 @@ import componentVersion from 'app/entities/component-version/component-version.r
 import environment from 'app/entities/environment/environment.reducer';
 // prettier-ignore
 import componentSet from 'app/entities/component-set/component-set.reducer';
+// prettier-ignore
+import releaseCatalog from 'app/entities/release-catalog/release-catalog.reducer';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
 const rootReducer = {
@@ -37,6 +39,7 @@ const rootReducer = {
   componentVersion,
   environment,
   componentSet,
+  releaseCatalog,
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
   loadingBar,
 };

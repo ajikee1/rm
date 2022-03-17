@@ -24,7 +24,7 @@ public class ComponentVersion implements Serializable {
     private Long componentVersionNumber;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "componentVersions", "componentSets", "deploymentKindCatalog" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "componentVersions", "deploymentKindCatalog" }, allowSetters = true)
     private ComponentDefinition componentId;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

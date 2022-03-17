@@ -1,0 +1,26 @@
+{
+  "applications": "*",
+  "changelogDate": "20220317165845",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "release_catalog",
+  "fields": [
+    {
+      "fieldName": "releaseId",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "scheduledDateTime",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "ReleaseCatalog",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [],
+  "service": "no"
+}

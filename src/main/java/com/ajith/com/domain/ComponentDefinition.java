@@ -33,10 +33,6 @@ public class ComponentDefinition implements Serializable {
     @JsonIgnoreProperties(value = { "componentId" }, allowSetters = true)
     private Set<ComponentVersion> componentVersions = new HashSet<>();
 
-    @OneToMany(mappedBy = "componentId")
-    @JsonIgnoreProperties(value = { "componentId" }, allowSetters = true)
-    private Set<ComponentSet> componentSets = new HashSet<>();
-
     @ManyToOne
     @JsonIgnoreProperties(value = { "componentDefinitions" }, allowSetters = true)
     private DeploymentKindCatalog deploymentKindCatalog;
@@ -110,37 +106,6 @@ public class ComponentDefinition implements Serializable {
     public ComponentDefinition removeComponentVersion(ComponentVersion componentVersion) {
         this.componentVersions.remove(componentVersion);
         componentVersion.setComponentId(null);
-        return this;
-    }
-
-    public Set<ComponentSet> getComponentSets() {
-        return this.componentSets;
-    }
-
-    public void setComponentSets(Set<ComponentSet> componentSets) {
-        if (this.componentSets != null) {
-            this.componentSets.forEach(i -> i.setComponentId(null));
-        }
-        if (componentSets != null) {
-            componentSets.forEach(i -> i.setComponentId(this));
-        }
-        this.componentSets = componentSets;
-    }
-
-    public ComponentDefinition componentSets(Set<ComponentSet> componentSets) {
-        this.setComponentSets(componentSets);
-        return this;
-    }
-
-    public ComponentDefinition addComponentSet(ComponentSet componentSet) {
-        this.componentSets.add(componentSet);
-        componentSet.setComponentId(this);
-        return this;
-    }
-
-    public ComponentDefinition removeComponentSet(ComponentSet componentSet) {
-        this.componentSets.remove(componentSet);
-        componentSet.setComponentId(null);
         return this;
     }
 

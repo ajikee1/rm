@@ -21,8 +21,16 @@ entity ComponentSet {
     componentSetName String required
 }
 
+entity ReleaseCatalog {
+    releaseId String required
+    scheduledDateTime LocalDate required
+}
+
 relationship OneToMany {
     DeploymentKindCatalog to ComponentDefinition{DeploymentKindCatalog(deploymentKind)},
-    ComponentDefinition to ComponentVersion{ComponentId(componentId)},
-    ComponentDefinition to ComponentSet{ComponentId(componentId)}
+    ComponentDefinition to ComponentVersion{ComponentId(componentId)}
+}
+
+relationship ManyToOne {
+    ComponentSet{ComponentId(componentId)} to ComponentDefinition
 }
