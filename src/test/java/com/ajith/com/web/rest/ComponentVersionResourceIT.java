@@ -32,6 +32,9 @@ class ComponentVersionResourceIT {
     private static final Long DEFAULT_COMPONENT_VERSION_NUMBER = 1L;
     private static final Long UPDATED_COMPONENT_VERSION_NUMBER = 2L;
 
+    private static final String DEFAULT_COMPONENT_VERSION_STATUS = "AAAAAAAAAA";
+    private static final String UPDATED_COMPONENT_VERSION_STATUS = "BBBBBBBBBB";
+
     private static final String ENTITY_API_URL = "/api/component-versions";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
@@ -56,7 +59,9 @@ class ComponentVersionResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static ComponentVersion createEntity(EntityManager em) {
-        ComponentVersion componentVersion = new ComponentVersion().componentVersionNumber(DEFAULT_COMPONENT_VERSION_NUMBER);
+        ComponentVersion componentVersion = new ComponentVersion()
+            .componentVersionNumber(DEFAULT_COMPONENT_VERSION_NUMBER)
+            .componentVersionStatus(DEFAULT_COMPONENT_VERSION_STATUS);
         return componentVersion;
     }
 
@@ -67,7 +72,9 @@ class ComponentVersionResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static ComponentVersion createUpdatedEntity(EntityManager em) {
-        ComponentVersion componentVersion = new ComponentVersion().componentVersionNumber(UPDATED_COMPONENT_VERSION_NUMBER);
+        ComponentVersion componentVersion = new ComponentVersion()
+            .componentVersionNumber(UPDATED_COMPONENT_VERSION_NUMBER)
+            .componentVersionStatus(UPDATED_COMPONENT_VERSION_STATUS);
         return componentVersion;
     }
 
@@ -92,6 +99,7 @@ class ComponentVersionResourceIT {
         assertThat(componentVersionList).hasSize(databaseSizeBeforeCreate + 1);
         ComponentVersion testComponentVersion = componentVersionList.get(componentVersionList.size() - 1);
         assertThat(testComponentVersion.getComponentVersionNumber()).isEqualTo(DEFAULT_COMPONENT_VERSION_NUMBER);
+        assertThat(testComponentVersion.getComponentVersionStatus()).isEqualTo(DEFAULT_COMPONENT_VERSION_STATUS);
     }
 
     @Test
@@ -135,6 +143,25 @@ class ComponentVersionResourceIT {
 
     @Test
     @Transactional
+    void checkComponentVersionStatusIsRequired() throws Exception {
+        int databaseSizeBeforeTest = componentVersionRepository.findAll().size();
+        // set the field null
+        componentVersion.setComponentVersionStatus(null);
+
+        // Create the ComponentVersion, which fails.
+
+        restComponentVersionMockMvc
+            .perform(
+                post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(componentVersion))
+            )
+            .andExpect(status().isBadRequest());
+
+        List<ComponentVersion> componentVersionList = componentVersionRepository.findAll();
+        assertThat(componentVersionList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     void getAllComponentVersions() throws Exception {
         // Initialize the database
         componentVersionRepository.saveAndFlush(componentVersion);
@@ -145,7 +172,8 @@ class ComponentVersionResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(componentVersion.getId().intValue())))
-            .andExpect(jsonPath("$.[*].componentVersionNumber").value(hasItem(DEFAULT_COMPONENT_VERSION_NUMBER.intValue())));
+            .andExpect(jsonPath("$.[*].componentVersionNumber").value(hasItem(DEFAULT_COMPONENT_VERSION_NUMBER.intValue())))
+            .andExpect(jsonPath("$.[*].componentVersionStatus").value(hasItem(DEFAULT_COMPONENT_VERSION_STATUS)));
     }
 
     @Test
@@ -160,7 +188,8 @@ class ComponentVersionResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(componentVersion.getId().intValue()))
-            .andExpect(jsonPath("$.componentVersionNumber").value(DEFAULT_COMPONENT_VERSION_NUMBER.intValue()));
+            .andExpect(jsonPath("$.componentVersionNumber").value(DEFAULT_COMPONENT_VERSION_NUMBER.intValue()))
+            .andExpect(jsonPath("$.componentVersionStatus").value(DEFAULT_COMPONENT_VERSION_STATUS));
     }
 
     @Test
@@ -182,7 +211,9 @@ class ComponentVersionResourceIT {
         ComponentVersion updatedComponentVersion = componentVersionRepository.findById(componentVersion.getId()).get();
         // Disconnect from session so that the updates on updatedComponentVersion are not directly saved in db
         em.detach(updatedComponentVersion);
-        updatedComponentVersion.componentVersionNumber(UPDATED_COMPONENT_VERSION_NUMBER);
+        updatedComponentVersion
+            .componentVersionNumber(UPDATED_COMPONENT_VERSION_NUMBER)
+            .componentVersionStatus(UPDATED_COMPONENT_VERSION_STATUS);
 
         restComponentVersionMockMvc
             .perform(
@@ -197,6 +228,7 @@ class ComponentVersionResourceIT {
         assertThat(componentVersionList).hasSize(databaseSizeBeforeUpdate);
         ComponentVersion testComponentVersion = componentVersionList.get(componentVersionList.size() - 1);
         assertThat(testComponentVersion.getComponentVersionNumber()).isEqualTo(UPDATED_COMPONENT_VERSION_NUMBER);
+        assertThat(testComponentVersion.getComponentVersionStatus()).isEqualTo(UPDATED_COMPONENT_VERSION_STATUS);
     }
 
     @Test
@@ -282,6 +314,7 @@ class ComponentVersionResourceIT {
         assertThat(componentVersionList).hasSize(databaseSizeBeforeUpdate);
         ComponentVersion testComponentVersion = componentVersionList.get(componentVersionList.size() - 1);
         assertThat(testComponentVersion.getComponentVersionNumber()).isEqualTo(DEFAULT_COMPONENT_VERSION_NUMBER);
+        assertThat(testComponentVersion.getComponentVersionStatus()).isEqualTo(DEFAULT_COMPONENT_VERSION_STATUS);
     }
 
     @Test
@@ -296,7 +329,9 @@ class ComponentVersionResourceIT {
         ComponentVersion partialUpdatedComponentVersion = new ComponentVersion();
         partialUpdatedComponentVersion.setId(componentVersion.getId());
 
-        partialUpdatedComponentVersion.componentVersionNumber(UPDATED_COMPONENT_VERSION_NUMBER);
+        partialUpdatedComponentVersion
+            .componentVersionNumber(UPDATED_COMPONENT_VERSION_NUMBER)
+            .componentVersionStatus(UPDATED_COMPONENT_VERSION_STATUS);
 
         restComponentVersionMockMvc
             .perform(
@@ -311,6 +346,7 @@ class ComponentVersionResourceIT {
         assertThat(componentVersionList).hasSize(databaseSizeBeforeUpdate);
         ComponentVersion testComponentVersion = componentVersionList.get(componentVersionList.size() - 1);
         assertThat(testComponentVersion.getComponentVersionNumber()).isEqualTo(UPDATED_COMPONENT_VERSION_NUMBER);
+        assertThat(testComponentVersion.getComponentVersionStatus()).isEqualTo(UPDATED_COMPONENT_VERSION_STATUS);
     }
 
     @Test

@@ -23,6 +23,10 @@ public class ComponentVersion implements Serializable {
     @Column(name = "component_version_number", nullable = false)
     private Long componentVersionNumber;
 
+    @NotNull
+    @Column(name = "component_version_status", nullable = false)
+    private String componentVersionStatus;
+
     @ManyToOne
     @JsonIgnoreProperties(value = { "componentVersions", "deploymentKindCatalog" }, allowSetters = true)
     private ComponentDefinition componentId;
@@ -53,6 +57,19 @@ public class ComponentVersion implements Serializable {
 
     public void setComponentVersionNumber(Long componentVersionNumber) {
         this.componentVersionNumber = componentVersionNumber;
+    }
+
+    public String getComponentVersionStatus() {
+        return this.componentVersionStatus;
+    }
+
+    public ComponentVersion componentVersionStatus(String componentVersionStatus) {
+        this.setComponentVersionStatus(componentVersionStatus);
+        return this;
+    }
+
+    public void setComponentVersionStatus(String componentVersionStatus) {
+        this.componentVersionStatus = componentVersionStatus;
     }
 
     public ComponentDefinition getComponentId() {
@@ -93,6 +110,7 @@ public class ComponentVersion implements Serializable {
         return "ComponentVersion{" +
             "id=" + getId() +
             ", componentVersionNumber=" + getComponentVersionNumber() +
+            ", componentVersionStatus='" + getComponentVersionStatus() + "'" +
             "}";
     }
 }

@@ -17,6 +17,9 @@
             <column name="component_version_number" type="bigint">
                 <constraints nullable="false" />
             </column>
+            <column name="component_version_status" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
             <column name="component_id_id" type="bigint">
                 <constraints nullable="true" />
             </column>
@@ -42,6 +45,7 @@
                   usePreparedStatements="true">
             <column name="id" type="numeric"/>
             <column name="component_version_number" type="numeric"/>
+            <column name="component_version_status" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

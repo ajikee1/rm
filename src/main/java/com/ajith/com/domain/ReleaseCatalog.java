@@ -1,5 +1,6 @@
 package com.ajith.com.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.time.LocalDate;
 import javax.persistence.*;
@@ -26,6 +27,14 @@ public class ReleaseCatalog implements Serializable {
     @NotNull
     @Column(name = "scheduled_date_time", nullable = false)
     private LocalDate scheduledDateTime;
+
+    @ManyToOne
+    @JsonIgnoreProperties(value = { "componentVersions", "deploymentKindCatalog" }, allowSetters = true)
+    private ComponentDefinition componentId;
+
+    @ManyToOne
+    @JsonIgnoreProperties(value = { "componentId" }, allowSetters = true)
+    private ComponentVersion componentVersionNumber;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -66,6 +75,32 @@ public class ReleaseCatalog implements Serializable {
 
     public void setScheduledDateTime(LocalDate scheduledDateTime) {
         this.scheduledDateTime = scheduledDateTime;
+    }
+
+    public ComponentDefinition getComponentId() {
+        return this.componentId;
+    }
+
+    public void setComponentId(ComponentDefinition componentDefinition) {
+        this.componentId = componentDefinition;
+    }
+
+    public ReleaseCatalog componentId(ComponentDefinition componentDefinition) {
+        this.setComponentId(componentDefinition);
+        return this;
+    }
+
+    public ComponentVersion getComponentVersionNumber() {
+        return this.componentVersionNumber;
+    }
+
+    public void setComponentVersionNumber(ComponentVersion componentVersion) {
+        this.componentVersionNumber = componentVersion;
+    }
+
+    public ReleaseCatalog componentVersionNumber(ComponentVersion componentVersion) {
+        this.setComponentVersionNumber(componentVersion);
+        return this;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

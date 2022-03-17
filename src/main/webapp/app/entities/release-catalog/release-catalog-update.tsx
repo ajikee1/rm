@@ -4,6 +4,10 @@ import { Button, Row, Col, FormText } from 'reactstrap';
 import { isNumber, ValidatedField, ValidatedForm } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+import { IComponentDefinition } from 'app/shared/model/component-definition.model';
+import { getEntities as getComponentDefinitions } from 'app/entities/component-definition/component-definition.reducer';
+import { IComponentVersion } from 'app/shared/model/component-version.model';
+import { getEntities as getComponentVersions } from 'app/entities/component-version/component-version.reducer';
 import { getEntity, updateEntity, createEntity, reset } from './release-catalog.reducer';
 import { IReleaseCatalog } from 'app/shared/model/release-catalog.model';
 import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
@@ -15,6 +19,8 @@ export const ReleaseCatalogUpdate = (props: RouteComponentProps<{ id: string }>)
 
   const [isNew] = useState(!props.match.params || !props.match.params.id);
 
+  const componentDefinitions = useAppSelector(state => state.componentDefinition.entities);
+  const componentVersions = useAppSelector(state => state.componentVersion.entities);
   const releaseCatalogEntity = useAppSelector(state => state.releaseCatalog.entity);
   const loading = useAppSelector(state => state.releaseCatalog.loading);
   const updating = useAppSelector(state => state.releaseCatalog.updating);
@@ -29,6 +35,9 @@ export const ReleaseCatalogUpdate = (props: RouteComponentProps<{ id: string }>)
     } else {
       dispatch(getEntity(props.match.params.id));
     }
+
+    dispatch(getComponentDefinitions({}));
+    dispatch(getComponentVersions({}));
   }, []);
 
   useEffect(() => {
@@ -41,6 +50,8 @@ export const ReleaseCatalogUpdate = (props: RouteComponentProps<{ id: string }>)
     const entity = {
       ...releaseCatalogEntity,
       ...values,
+      componentId: componentDefinitions.find(it => it.id.toString() === values.componentId.toString()),
+      componentVersionNumber: componentVersions.find(it => it.id.toString() === values.componentVersionNumber.toString()),
     };
 
     if (isNew) {
@@ -55,6 +66,8 @@ export const ReleaseCatalogUpdate = (props: RouteComponentProps<{ id: string }>)
       ? {}
       : {
           ...releaseCatalogEntity,
+          componentId: releaseCatalogEntity?.componentId?.id,
+          componentVersionNumber: releaseCatalogEntity?.componentVersionNumber?.id,
         };
 
   return (
@@ -95,6 +108,32 @@ export const ReleaseCatalogUpdate = (props: RouteComponentProps<{ id: string }>)
                   required: { value: true, message: 'This field is required.' },
                 }}
               />
+              <ValidatedField id="release-catalog-componentId" name="componentId" data-cy="componentId" label="Component Id" type="select">
+                <option value="" key="0" />
+                {componentDefinitions
+                  ? componentDefinitions.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.componentId}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="release-catalog-componentVersionNumber"
+                name="componentVersionNumber"
+                data-cy="componentVersionNumber"
+                label="Component Version Number"
+                type="select"
+              >
+                <option value="" key="0" />
+                {componentVersions
+                  ? componentVersions.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.componentVersionNumber}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
               <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/release-catalog" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;

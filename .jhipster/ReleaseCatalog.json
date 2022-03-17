@@ -21,6 +21,21 @@
   "name": "ReleaseCatalog",
   "pagination": "no",
   "readOnly": false,
-  "relationships": [],
+  "relationships": [
+    {
+      "otherEntityField": "componentId",
+      "otherEntityName": "componentDefinition",
+      "otherEntityRelationshipName": "releaseCatalog",
+      "relationshipName": "componentId",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "componentVersionNumber",
+      "otherEntityName": "componentVersion",
+      "otherEntityRelationshipName": "releaseCatalog",
+      "relationshipName": "componentVersionNumber",
+      "relationshipType": "many-to-one"
+    }
+  ],
   "service": "no"
 }

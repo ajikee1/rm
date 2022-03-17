@@ -47,6 +47,8 @@ export const ReleaseCatalog = (props: RouteComponentProps<{ url: string }>) => {
                 <th>ID</th>
                 <th>Release Id</th>
                 <th>Scheduled Date Time</th>
+                <th>Component Id</th>
+                <th>Component Version Number</th>
                 <th />
               </tr>
             </thead>
@@ -63,6 +65,22 @@ export const ReleaseCatalog = (props: RouteComponentProps<{ url: string }>) => {
                     {releaseCatalog.scheduledDateTime ? (
                       <TextFormat type="date" value={releaseCatalog.scheduledDateTime} format={APP_LOCAL_DATE_FORMAT} />
                     ) : null}
+                  </td>
+                  <td>
+                    {releaseCatalog.componentId ? (
+                      <Link to={`component-definition/${releaseCatalog.componentId.id}`}>{releaseCatalog.componentId.componentId}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {releaseCatalog.componentVersionNumber ? (
+                      <Link to={`component-version/${releaseCatalog.componentVersionNumber.id}`}>
+                        {releaseCatalog.componentVersionNumber.componentVersionNumber}
+                      </Link>
+                    ) : (
+                      ''
+                    )}
                   </td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">

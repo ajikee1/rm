@@ -37,6 +37,10 @@ export const ReleaseCatalogDetail = (props: RouteComponentProps<{ id: string }>)
               <TextFormat value={releaseCatalogEntity.scheduledDateTime} type="date" format={APP_LOCAL_DATE_FORMAT} />
             ) : null}
           </dd>
+          <dt>Component Id</dt>
+          <dd>{releaseCatalogEntity.componentId ? releaseCatalogEntity.componentId.componentId : ''}</dd>
+          <dt>Component Version Number</dt>
+          <dd>{releaseCatalogEntity.componentVersionNumber ? releaseCatalogEntity.componentVersionNumber.componentVersionNumber : ''}</dd>
         </dl>
         <Button tag={Link} to="/release-catalog" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" /> <span className="d-none d-md-inline">Back</span>

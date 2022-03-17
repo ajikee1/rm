@@ -20,6 +20,12 @@
             <column name="scheduled_date_time" type="date">
                 <constraints nullable="false" />
             </column>
+            <column name="component_id_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="component_version_number_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
     </changeSet>

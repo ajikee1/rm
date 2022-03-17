@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+    <!--
+        Added the constraints for entity ReleaseCatalog.
+    -->
+    <changeSet id="20220317165845-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="component_id_id"
+                                 baseTableName="release_catalog"
+                                 constraintName="fk_release_catalog__component_id_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="component_definition"/>
+
+        <addForeignKeyConstraint baseColumnNames="component_version_number_id"
+                                 baseTableName="release_catalog"
+                                 constraintName="fk_release_catalog__component_version_number_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="component_version"/>
+    </changeSet>
+</databaseChangeLog>

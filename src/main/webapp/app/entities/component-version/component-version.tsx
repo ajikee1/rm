@@ -46,6 +46,7 @@ export const ComponentVersion = (props: RouteComponentProps<{ url: string }>) =>
               <tr>
                 <th>ID</th>
                 <th>Component Version Number</th>
+                <th>Component Version Status</th>
                 <th>Component Id</th>
                 <th />
               </tr>
@@ -59,6 +60,7 @@ export const ComponentVersion = (props: RouteComponentProps<{ url: string }>) =>
                     </Button>
                   </td>
                   <td>{componentVersion.componentVersionNumber}</td>
+                  <td>{componentVersion.componentVersionStatus}</td>
                   <td>
                     {componentVersion.componentId ? (
                       <Link to={`component-definition/${componentVersion.componentId.id}`}>{componentVersion.componentId.componentId}</Link>

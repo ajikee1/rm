@@ -29,6 +29,10 @@ export const ComponentVersionDetail = (props: RouteComponentProps<{ id: string }
             <span id="componentVersionNumber">Component Version Number</span>
           </dt>
           <dd>{componentVersionEntity.componentVersionNumber}</dd>
+          <dt>
+            <span id="componentVersionStatus">Component Version Status</span>
+          </dt>
+          <dd>{componentVersionEntity.componentVersionStatus}</dd>
           <dt>Component Id</dt>
           <dd>{componentVersionEntity.componentId ? componentVersionEntity.componentId.componentId : ''}</dd>
         </dl>

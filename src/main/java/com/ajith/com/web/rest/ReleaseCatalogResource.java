@@ -146,12 +146,13 @@ public class ReleaseCatalogResource {
     /**
      * {@code GET  /release-catalogs} : get all the releaseCatalogs.
      *
+     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of releaseCatalogs in body.
      */
     @GetMapping("/release-catalogs")
-    public List<ReleaseCatalog> getAllReleaseCatalogs() {
+    public List<ReleaseCatalog> getAllReleaseCatalogs(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get all ReleaseCatalogs");
-        return releaseCatalogRepository.findAll();
+        return releaseCatalogRepository.findAllWithEagerRelationships();
     }
 
     /**
@@ -163,7 +164,7 @@ public class ReleaseCatalogResource {
     @GetMapping("/release-catalogs/{id}")
     public ResponseEntity<ReleaseCatalog> getReleaseCatalog(@PathVariable Long id) {
         log.debug("REST request to get ReleaseCatalog : {}", id);
-        Optional<ReleaseCatalog> releaseCatalog = releaseCatalogRepository.findById(id);
+        Optional<ReleaseCatalog> releaseCatalog = releaseCatalogRepository.findOneWithEagerRelationships(id);
         return ResponseUtil.wrapOrNotFound(releaseCatalog);
     }
 

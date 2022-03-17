@@ -129,6 +129,9 @@ public class ComponentVersionResource {
                 if (componentVersion.getComponentVersionNumber() != null) {
                     existingComponentVersion.setComponentVersionNumber(componentVersion.getComponentVersionNumber());
                 }
+                if (componentVersion.getComponentVersionStatus() != null) {
+                    existingComponentVersion.setComponentVersionStatus(componentVersion.getComponentVersionStatus());
+                }
 
                 return existingComponentVersion;
             })

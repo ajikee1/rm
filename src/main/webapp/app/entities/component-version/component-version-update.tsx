@@ -94,6 +94,16 @@ export const ComponentVersionUpdate = (props: RouteComponentProps<{ id: string }
                 }}
               />
               <ValidatedField
+                label="Component Version Status"
+                id="component-version-componentVersionStatus"
+                name="componentVersionStatus"
+                data-cy="componentVersionStatus"
+                type="text"
+                validate={{
+                  required: { value: true, message: 'This field is required.' },
+                }}
+              />
+              <ValidatedField
                 id="component-version-componentId"
                 name="componentId"
                 data-cy="componentId"

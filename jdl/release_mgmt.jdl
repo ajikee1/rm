@@ -10,6 +10,7 @@ entity DeploymentKindCatalog {
 
 entity ComponentVersion {
 	componentVersionNumber Long required
+	componentVersionStatus String required
 }
 
 entity Environment {
@@ -32,5 +33,7 @@ relationship OneToMany {
 }
 
 relationship ManyToOne {
-    ComponentSet{ComponentId(componentId)} to ComponentDefinition
+    ComponentSet{ComponentId(componentId)} to ComponentDefinition,
+    ReleaseCatalog{ComponentId(componentId)} to ComponentDefinition,
+    ReleaseCatalog{ComponentVersionNumber(componentVersionNumber)} to ComponentVersion
 }
